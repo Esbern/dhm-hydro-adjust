@@ -1,5 +1,6 @@
 # DHM Hydro Adjust
 
+This fork is just a dockerixed version of the original
 Tools to burn hydrological adjustment objects into a DEM raster.
 
 ## Background
