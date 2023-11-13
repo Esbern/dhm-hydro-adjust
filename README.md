@@ -21,7 +21,7 @@ subgraph Subgraph_3
 right.1
 end
 Subgraph_1 --- Subgraph_2 --- Subgraph_3
-click left.1 "[https://www.google.com](https://github.com/Esbern/dhm-hydro-adjust/blob/master/README.md)"
+click left.1 "https://github.com/Esbern/dhm-hydro-adjust/blob/master/README.md"
 click middle.1 "https://www.google.com"
 click right.1 "https://www.google.com"
 ```
