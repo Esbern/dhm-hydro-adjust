@@ -8,7 +8,7 @@ Here is a simple flow chart:
 
 ```mermaid
 graph TD;
-    A-->B;
+    A hej med dig-->B;
     A-->C;
     B-->D;
     C-->D;
