@@ -4,6 +4,15 @@ This fork is just a dockerixed version of the original repo at https://github.co
 
 Tools to burn hydrological adjustment objects into a DEM raster.
 
+```mermaid
+graph LR
+    A[Start] --> B{Decision?}
+    B -->|Yes| C[Do Something]
+    B -->|No| D[Do Something Else]
+    C --> E[End]
+    D --> E
+
+
 ## Background
 
 These tools are intended to modify a DEM raster to ensure that it is
