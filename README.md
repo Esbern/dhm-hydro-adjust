@@ -7,11 +7,23 @@ Tools to burn hydrological adjustment objects into a DEM raster.
 Here is a simple flow chart:
 
 ```mermaid
-graph TD;
-    A hej med dig-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+flowchart LR
+left.1
+middle.1
+right.1
+subgraph Subgraph_1
+left.1
+end
+subgraph Subgraph_2
+middle.1
+end
+subgraph Subgraph_3
+right.1
+end
+Subgraph_1 --- Subgraph_2 --- Subgraph_3
+click left.1 "https://www.google.com"
+click middle.1 "https://www.google.com"
+click right.1 "https://www.google.com"
 ```
 
 ## Background
