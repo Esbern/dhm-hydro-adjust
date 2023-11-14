@@ -1,30 +1,11 @@
 # DHM Hydro Adjust
 
-This fork is just a dockerixed version of the original repo at https://github.com/SDFIdk/dhm-hydro-adjust
+This is a dockerized version of the original repo at https://github.com/SDFIdk/dhm-hydro-adjust
 
 Tools to burn hydrological adjustment objects into a DEM raster.
 
 Here is a simple flow chart:
 
-```mermaid
-flowchart LR
-left.1
-middle.1
-right.1
-subgraph Subgraph_1
-left.1
-end
-subgraph Subgraph_2
-middle.1
-end
-subgraph Subgraph_3
-right.1
-end
-Subgraph_1 --- Subgraph_2 --- Subgraph_3
-click left.1 "https://github.com/Esbern/dhm-hydro-adjust/blob/master/README.md"
-click middle.1 "https://www.google.com"
-click right.1 "https://www.google.com"
-```
 
 ## Background
 
@@ -66,22 +47,7 @@ the line objects.
 
 *Adjustment with horseshoe object, left to right: original DTM, horseshoe object, horseshoe object rendered as lines, adjusted DTM*
 
-## Installation
 
-A Python 3 environment with GDAL, NumPy, SciPy and tqdm is required. To run
-the tests, pytest is also required. A suitable Conda environment (here called
-"hydroadjust") can be created with:
-
-```
-conda env create -n hydroadjust -f environment.yml
-```
-
-For now, the tools support editable installation using `pip`. To install this
-way, use the following command in the root directory:
-
-```
-pip install -e .
-```
 
 ## Usage
 
