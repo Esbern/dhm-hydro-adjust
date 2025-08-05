@@ -1,11 +1,42 @@
 # DHM Hydro Adjust
 
-This is a dockerized version of the original repo at https://github.com/SDFIdk/dhm-hydro-adjust
+This is a refactored version of the original repo at https://github.com/SDFIdk/dhm-hydro-adjust
 
-Tools to burn hydrological adjustment objects into a DEM raster.
+**Now with Jupyter Notebook Support!** 🎉
 
-Here is a simple flow chart:
+Tools to burn hydrological adjustment objects into a DEM raster, optimized for easy use in Jupyter notebooks.
 
+## Quick Start
+
+### Installation
+```bash
+pip install -e .
+```
+
+### Simple Usage
+```python
+from hydroadjust import create_hydro_adjusted_dtm
+
+result = create_hydro_adjusted_dtm(
+    dtm_raster="path/to/dtm.tif",
+    horseshoe_file="path/to/horseshoes.gpkg", 
+    line_file="path/to/lines.gpkg",
+    output_dir="path/to/output"
+)
+```
+
+### Notebook Workflow
+Open `hydro_workflow_notebook.ipynb` for a complete step-by-step workflow with examples and configuration options.
+
+## What's New
+
+- ✅ **Notebook-First Design**: Easy to use in Jupyter notebooks
+- ✅ **One-Line Workflow**: Complete processing in a single function call
+- ✅ **Step-by-Step Control**: Run individual steps as needed
+- ✅ **Progress Tracking**: Built-in logging and progress bars
+- ✅ **Better Error Handling**: Clear error messages and warnings
+- ✅ **Flexible I/O**: Works with various file formats and paths
+- ✅ **Backwards Compatible**: Original CLI commands still available
 
 ## Background
 
@@ -51,18 +82,58 @@ the line objects.
 
 ## Usage
 
-The DEM raster is assumed to be divided into tiles, and since adjustment
-objects may straddle tile boundaries, it is generally necessary to sample the
-DEM in an area larger than the tile to burn into. In order to most
-conveniently handle this, the recommended workflow is conceptually a two-step
-process:
+### Method 1: Notebook Workflow (Recommended)
 
-1. Sample a DEM VRT for the provided (2D) adjustment objects, creating
-intermediate "ready-to-burn" vector objects with appropriate elevation data
-2. For each tile, create a copy with those "ready-to-burn" objects burned in
+Open `hydro_workflow_notebook.ipynb` and follow the interactive workflow. The notebook provides:
+- Configuration section for easy path setup
+- Step-by-step execution with progress tracking  
+- Quality control and visualization options
+- Both simple one-step and detailed multi-step approaches
 
-**Please note that the command-line interface for these tools is not
-stabilized yet. Expect breaking changes.**
+### Method 2: Python Script
+
+```python
+from hydroadjust import create_hydro_adjusted_dtm
+from pathlib import Path
+
+# Define your data paths
+dtm_raster = Path("data/dtm.tif")
+horseshoe_file = Path("data/horseshoes.gpkg")
+line_file = Path("data/lines.gpkg")
+output_dir = Path("output")
+
+# Run the complete workflow
+result = create_hydro_adjusted_dtm(
+    dtm_raster=dtm_raster,
+    horseshoe_file=horseshoe_file,
+    line_file=line_file,
+    output_dir=output_dir,
+    horseshoe_layer='dhmhestesko',
+    line_layer='dhmlinje'
+)
+
+print(f"Hydro-adjusted DTM created: {result}")
+```
+
+### Method 3: Advanced Step-by-Step Control
+
+```python
+from hydroadjust import HydroAdjustWorkflow
+
+# Initialize workflow
+workflow = HydroAdjustWorkflow(dtm_raster, horseshoe_file, line_file, output_dir)
+
+# Run individual steps
+workflow.filter_vectors_by_bounds()
+workflow.sample_line_z(workflow.lines_filtered, workflow.lines_with_z)
+workflow.sample_horseshoe_z_lines(workflow.hs_filtered, workflow.hs_with_z)
+workflow.merge_line_files([workflow.lines_with_z, workflow.hs_with_z], workflow.combined_lines)
+workflow.burn_lines_to_raster(workflow.combined_lines, workflow.hydro_dtm)
+```
+
+### Method 4: Original Command Line Interface
+
+The original CLI commands are still available:
 
 ### Preparing line objects for burning
 
